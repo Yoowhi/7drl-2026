@@ -1,0 +1,59 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Raylib Game (Debug)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/MyRaylibGame",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "Build (Debug)",
+            "environment": [
+                { "name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build" },
+                { "name": "DYLD_LIBRARY_PATH", "value": "${workspaceFolder}/build" }
+            ],
+            "MIMode": "lldb",
+            "osx": {
+                "targetArchitecture": "arm64",
+                "program": "${workspaceFolder}/build/MyRaylibGame"
+            },
+            "linux": {
+                "targetArchitecture": "x86_64",
+                "program": "${workspaceFolder}/build/MyRaylibGame"
+            },
+            "windows": {
+                "program": "${workspaceFolder}/build/MyRaylibGame.exe",
+                "MIMode": "gdb",
+                "targetArchitecture": "x64"
+            },
+        },
+        {
+            "name": "Launch Raylib Game (Release)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/MyRaylibGame",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "Build (Release)",
+            "environment": [
+                { "name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build" },
+                { "name": "DYLD_LIBRARY_PATH", "value": "${workspaceFolder}/build" }
+            ],
+            "MIMode": "lldb",
+            "osx": {
+                "targetArchitecture": "arm64",
+                "program": "${workspaceFolder}/build/MyRaylibGame"
+            },
+            "linux": {
+                "targetArchitecture": "x86_64",
+                "program": "${workspaceFolder}/build/MyRaylibGame"
+            },
+            "windows": {
+                "program": "${workspaceFolder}/build/MyRaylibGame.exe",
+                "MIMode": "gdb",
+                "targetArchitecture": "x64"
+            }
+        }
+    ]
+}
