@@ -12,6 +12,13 @@ file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}")
 # ============ FETCH ============
 
 FetchContent_Declare(
+    EnTT
+    GIT_REPOSITORY "https://github.com/skypjack/entt"
+    GIT_TAG "v3.15.0"
+)
+FetchContent_MakeAvailable(EnTT)
+
+FetchContent_Declare(
         raylib
         GIT_REPOSITORY "https://github.com/raysan5/raylib"
         GIT_TAG "5.5"
@@ -30,6 +37,7 @@ file(
 add_executable(${PROJECT_NAME} "${SOURCE_FILES}")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+    EnTT::EnTT
     raylib
 )
 
