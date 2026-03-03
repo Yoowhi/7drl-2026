@@ -7,9 +7,9 @@
             "command": "cmake",
             "args": [
                 "..",
-                "-DR3D_RAYLIB_VENDORED=ON",
-                "-DR3D_ASSIMP_VENDORED=ON",
-                "-DR3D_BUILD_EXAMPLES=OFF",
+                // "-DR3D_RAYLIB_VENDORED=ON",
+                // "-DR3D_ASSIMP_VENDORED=ON",
+                // "-DR3D_BUILD_EXAMPLES=OFF",
                 "-DCMAKE_BUILD_TYPE=Debug",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
             ],
@@ -29,9 +29,9 @@
             "command": "cmake",
             "args": [
                 "..",
-                "-DR3D_RAYLIB_VENDORED=ON",
-                "-DR3D_ASSIMP_VENDORED=ON",
-                "-DR3D_BUILD_EXAMPLES=OFF",
+                // "-DR3D_RAYLIB_VENDORED=ON",
+                // "-DR3D_ASSIMP_VENDORED=ON",
+                // "-DR3D_BUILD_EXAMPLES=OFF",
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
             ],
