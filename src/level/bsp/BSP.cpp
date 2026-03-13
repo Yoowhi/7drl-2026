@@ -41,23 +41,19 @@ DividedCell divideCellHorizontally(Area cell, int intersection) {
 }
 
 Area findVerticalPath(std::vector<Area> upRooms, std::vector<Area> downRooms) {
-    // найти комнату с самым низким y в upRooms 
     Area upClosestRoom = upRooms[0];
     for (auto room : upRooms) {
         if (room.to.y > upClosestRoom.to.y) {
             upClosestRoom = room;
         }
     }
-    // найти комнату с самым высоким y у которой стенки пересекаются с найденной комнатой по иксу
     Area downClosestRoom = downRooms[0];
     int x;
-    bool found = false;
     for (auto room : downRooms) {
         int biggestFrom = std::max(room.from.x, upClosestRoom.from.x);
         int lowestTo = std::min(room.to.x, upClosestRoom.to.x);
         if (biggestFrom < lowestTo) {
             if (room.from.y <= downClosestRoom.from.y) {
-                found = true;
                 downClosestRoom = room;
                 x = (biggestFrom + lowestTo) / 2;
             }
@@ -92,37 +88,52 @@ Area findHorizontalPath(std::vector<Area> leftRooms, std::vector<Area> rightRoom
 
 CellNode* genCellTree(Area cell, Vec2i minSize) {
     CellNode* node = new CellNode();
-    if (cell.size.x <= minSize.x && cell.size.y <= minSize.y) {
+    node->area = cell;
+    if (cell.size.x <= minSize.x * 2 && cell.size.y <= minSize.y * 2) {
         Area room = Area({
-            cell.from.x + 1,
-            cell.from.y + 1,
+            cell.from.x,
+            cell.from.y,
         }, {
-            cell.to.x - 1,
-            cell.to.y - 1
+            cell.to.x,
+            cell.to.y
         });
-        // Area room = Area({
-        //     cell.from.x,
-        //     cell.from.y,
-        // }, {
-        //     cell.to.x,
-        //     cell.to.y
-        // });
         node->rooms.push_back(room);
         return node;
     }
-    node->area = cell;
     if (cell.size.x > cell.size.y) { // vertical slice
-        //int intersection = GetRandomValue(cell.from.x + 2, cell.to.x - 2);
-        int intersection = (cell.from.x + cell.to.x) / 2 + GetRandomValue(-2, 2);
+        int intersection = GetRandomValue(cell.from.x + minSize.x, cell.to.x - minSize.x);
+        //int intersection = (cell.from.x + cell.to.x) / 2 + GetRandomValue(-2, 2);
         auto [leftCell, rightCell] = divideCellVertically(cell, intersection);
+        // if (leftCell.size.x <= minSize.x || leftCell.size.y <= minSize.y || rightCell.size.x <= minSize.x || rightCell.size.y <= minSize.y) {
+        //     Area room = Area({
+        //         cell.from.x,
+        //         cell.from.y,
+        //     }, {
+        //         cell.to.x,
+        //         cell.to.y
+        //     });
+        //     node->rooms.push_back(room);
+        //     return node;
+        // }
         node->left = genCellTree(leftCell, minSize);
         node->right = genCellTree(rightCell, minSize);
         node->rooms = concatenate(node->left->rooms, node->right->rooms);
         node->pathway = findHorizontalPath(node->left->rooms, node->right->rooms);
     } else { // horizontal slice
-        //int intersection = GetRandomValue(cell.from.y + 2, cell.to.y - 2);
-        int intersection = (cell.from.y + cell.to.y) / 2 + GetRandomValue(-2, 2);
+        int intersection = GetRandomValue(cell.from.y + minSize.y, cell.to.y - minSize.y);
+        //int intersection = (cell.from.y + cell.to.y) / 2 + GetRandomValue(-2, 2);
         auto [upCell, downCell] = divideCellHorizontally(cell, intersection);
+        // if (upCell.size.x <= minSize.x || upCell.size.y <= minSize.y || downCell.size.x <= minSize.x || downCell.size.y <= minSize.y) {
+        //     Area room = Area({
+        //         cell.from.x,
+        //         cell.from.y,
+        //     }, {
+        //         cell.to.x,
+        //         cell.to.y
+        //     });
+        //     node->rooms.push_back(room);
+        //     return node;
+        // }
         node->left = genCellTree(upCell, minSize);
         node->right = genCellTree(downCell, minSize);
         node->rooms = concatenate(node->left->rooms, node->right->rooms);

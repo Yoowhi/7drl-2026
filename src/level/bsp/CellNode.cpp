@@ -1,6 +1,6 @@
 #include "CellNode.hpp"
 
-CellNode::CellNode() {
+CellNode::CellNode() : left(nullptr), right(nullptr) {
     
 }
 

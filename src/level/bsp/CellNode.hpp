@@ -7,8 +7,8 @@ class CellNode {
         Area area;
         Area pathway;
         std::vector<Area> rooms;
-        CellNode* left = nullptr;
-        CellNode* right = nullptr;
+        CellNode* left;
+        CellNode* right;
 
         CellNode();
         ~CellNode();

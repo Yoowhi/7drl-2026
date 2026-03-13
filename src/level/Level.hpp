@@ -4,14 +4,19 @@
 #include "Vec2i.hpp"
 #include "TileType.hpp"
 #include "./bsp/CellNode.hpp"
+#include "Wall.hpp"
 
 class Level {
     public:
         TileType* tilesMap;
         Vec2i size;
         CellNode* cellTree;
+
         Tile* tileList;
         int tileListSize;
+
+        Wall* wallList;
+        int wallListSize;
 
         
         static Level* createLevel(Vec2i size, Vec2i minSize);

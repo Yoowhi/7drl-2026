@@ -4,8 +4,8 @@
 
 
 void fillArea(Vec2i size, TileType* tileIds, Area area) {
-    for (int y = area.from.y; y < area.to.y; y++) {
-        for (int x = area.from.x; x < area.to.x; x++) {
+    for (int x = area.from.x; x < area.to.x; x++) {
+        for (int y = area.from.y; y < area.to.y; y++) {
             tileIds[y * size.y + x] = TileType::FLOOR;
         }
     }
@@ -14,7 +14,7 @@ void fillArea(Vec2i size, TileType* tileIds, Area area) {
 TileType* generateTiles(Vec2i size, CellNode* cellTree) {
     TileType* tileIds = new TileType[size.x * size.y];
     for (int i = 0; i < size.x * size.y; i++) {
-        tileIds[0] = TileType::EMPTY;
+        tileIds[i] = TileType::EMPTY;
     }
     CellNode* currentNode = cellTree;
     std::stack<CellNode*> stack;
@@ -41,3 +41,4 @@ TileType* generateTiles(Vec2i size, CellNode* cellTree) {
     }
     return tileIds;
 }
+
